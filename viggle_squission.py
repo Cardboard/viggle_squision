@@ -207,12 +207,15 @@ for FRAME in range(num_frames):
 
     print('\t\tsaving {}'.format(png_filename))
 
-    with Image(filename=svg_filename) as image:
-        with Color('transparent') as background_color:
-            library.MagickSetBackgroundColor(image.wand, background_color.resource)
-        png_image = image.make_blob('png32')
-    with open(png_filename, 'wb') as out:
-        out.write(png_image)
+    with Image(filename=svg_filename, background='transparent') as image:
+        #image.format = 'png'
+        #image.alpha_channel = True
+        #with Color('transparent') as background_color:
+        #    library.MagickSetBackgroundColor(image.wand, background_color.resource)
+        image.save(filename=png_filename)
+    #    png_image = image.make_blob('png32')
+    #with open(png_filename, 'wb') as out:
+    #    out.write(png_image)
 
     '''
     drawing = svg2rlg(svg_newfile)
